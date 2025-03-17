@@ -100,11 +100,11 @@ pub struct Settings {
     database_name: String,
     database_username: String,
     database_password: String,
-    log_webhook_uri: String,
-    sendgrid_api_key: String,
-    email_from_name: String,
-    email_from_address: String,
-    email_to_addresses: String,
+    pub log_webhook_uri: String,
+    pub sendgrid_api_key: String,
+    pub email_from_name: String,
+    pub email_from_address: String,
+    pub email_to_addresses: String,
 }
 
 impl Settings {
