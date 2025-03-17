@@ -95,7 +95,7 @@ mod tests {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "PascalCase")]
-struct Settings {
+pub struct Settings {
     database_server: String,
     database_name: String,
     database_username: String,
@@ -108,7 +108,7 @@ struct Settings {
 }
 
 impl Settings {
-    fn get_settings() -> Result<Settings, String> {
+    pub fn get_settings() -> Result<Settings, String> {
         let secret_blob = match env::var("SecretBlob") {
             Ok(s) => s,
             Err(e) => return Err(format!("Error getting env variable: {}", e.to_string())),
@@ -127,7 +127,7 @@ impl Settings {
         Ok(sett)
     }
 
-    fn get_sql_settings(&self) -> Config {
+    pub fn get_sql_settings(&self) -> Config {
         let mut sql_settings = Config::new();
         sql_settings.host(&self.database_server);
         sql_settings.application_name("Login Checker");
@@ -141,7 +141,7 @@ impl Settings {
         sql_settings
     }
 
-    fn get_email_destinations(&self) -> Vec<Email> {
+    pub fn get_email_destinations(&self) -> Vec<Email> {
         self.email_to_addresses
             .split(",")
             .map(|x| Email::new(x))
